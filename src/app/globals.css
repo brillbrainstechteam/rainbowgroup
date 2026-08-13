@@ -1,26 +1,172 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* ── Brand Colours ─────────────────────────────────────── */
+  --color-navy:         #3B4D82;
+  --color-navy-deep:    #2C3A68;
+  --color-navy-pale:    #EDF0F8;
+  --color-ink:          #28304A;
+  --color-coral:        #B8624F;
+  --color-coral-light:  #D4816A;
+  --color-muted:        #8A91AD;
+  --color-accent:       #9DAFD4;
+  --color-accent-tint:  #E8EDF7;
+  --color-line:         #DDE1EF;
+  --color-line-light:   #ECEEF7;
+  --color-bg:           #F9FAFB;
+  --color-bg-alt:       #EDF0F8;
+  --color-bg-warm:      #FDFBF8;
+  --color-white:        #FFFFFF;
+  /* Logo red — matches the rainbow arc in the SVG */
+  --color-logo-red:     #F54029;
+  --color-logo-navy:    #112754;
+  /* Richer accents for depth */
+  --color-gold:         #D9A441;
+  --color-teal:         #3E8E8A;
+
+  /* ── Typography ─────────────────────────────────────────── */
+  --font-serif:         var(--font-playfair), "Playfair Display", Georgia, serif;
+  --font-sans:          var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
+
+  /* ── Spacing extras ─────────────────────────────────────── */
+  --spacing-section:    6rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Base ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor targets so the fixed navbar never covers a heading */
+  scroll-padding-top: 5.5rem;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+/* ── Utility: hide scrollbar but keep scroll ─────────────── */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Eyebrow label (small caps section marker) ───────────── */
+.eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ── Gradient text ───────────────────────────────────────── */
+.text-gradient-warm {
+  background: linear-gradient(100deg, #F0A58E 0%, #D4816A 45%, #F54029 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Glass surface (for cards over photography) ──────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.glass-light {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-14px); }
+}
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  33%      { transform: translateY(-18px) translateX(8px); }
+  66%      { transform: translateY(8px) translateX(-8px); }
+}
+@keyframes blob {
+  0%, 100% { border-radius: 42% 58% 63% 37% / 43% 37% 63% 57%; transform: translate(0, 0) rotate(0deg); }
+  34%      { border-radius: 68% 32% 37% 63% / 62% 58% 42% 38%; transform: translate(24px, -18px) rotate(20deg); }
+  67%      { border-radius: 35% 65% 58% 42% / 38% 62% 38% 62%; transform: translate(-18px, 16px) rotate(-14deg); }
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes shimmer {
+  0%   { transform: translateX(-120%); }
+  100% { transform: translateX(220%); }
+}
+@keyframes drawLine {
+  from { stroke-dashoffset: var(--dash, 1000); }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes pulseRing {
+  0%   { transform: scale(0.82); opacity: 0.55; }
+  70%  { transform: scale(1.25); opacity: 0; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-float      { animation: float 6s ease-in-out infinite; }
+.animate-float-slow { animation: floatSlow 11s ease-in-out infinite; }
+.animate-blob       { animation: blob 18s ease-in-out infinite; }
+.animate-spin-slow  { animation: spinSlow 26s linear infinite; }
+.animate-pulse-ring { animation: pulseRing 3.4s cubic-bezier(0.24, 0.6, 0.35, 1) infinite; }
+.animate-marquee    { animation: marquee 34s linear infinite; }
+.animate-draw {
+  stroke-dasharray: var(--dash, 1000);
+  animation: drawLine 2.6s ease-out forwards;
+}
+
+/* Shimmer sweep used on premium buttons */
+.shimmer-parent { position: relative; overflow: hidden; }
+.shimmer-parent::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 80%
+  );
+  transform: translateX(-120%);
+  pointer-events: none;
+}
+.shimmer-parent:hover::after { animation: shimmer 1.1s ease-out; }
+
+/* Stagger helper for CSS-only reveals */
+.delay-1 { animation-delay: 0.9s; }
+.delay-2 { animation-delay: 1.8s; }
+.delay-3 { animation-delay: 2.7s; }
+
+/* ── Reduced motion: honour user preference ──────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
