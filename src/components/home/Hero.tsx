@@ -147,7 +147,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.35, ease: EASE_OUT }}
-            className="relative hidden sm:block h-[500px] lg:h-[560px]"
+            className="relative h-[330px] sm:h-[500px] lg:h-[560px]"
           >
             {/* Rotating dashed orbit */}
             <svg
