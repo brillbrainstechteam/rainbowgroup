@@ -141,7 +141,7 @@ export default function Institutions() {
                   </p>
                   <Link
                     href={inst.href}
-                    className="inline-flex items-center gap-2 text-sm font-medium transition-colors"
+                    className="inline-flex items-center gap-2 py-2 md:py-0 text-sm font-medium transition-colors"
                     style={{ color: accent }}
                   >
                     Explore {inst.shortName}

@@ -46,8 +46,11 @@ export default function Navbar() {
     setInstOpen(false);
   }, [pathname]);
 
+  // py-2.5 is a touch-target allowance, not spacing: tablets get the desktop nav
+  // at >=768px but are touch devices, and the 11px text alone is only ~17px tall.
+  // The header has a fixed height and centres its items, so this is visually inert.
   const linkBase =
-    "text-[11px] font-medium uppercase tracking-[0.14em] transition-colors duration-200";
+    "text-[11px] font-medium uppercase tracking-[0.14em] py-2.5 transition-colors duration-200";
   const linkColor = solid
     ? "text-[var(--color-ink)] hover:text-[var(--color-navy)]"
     : "text-white/80 hover:text-white";

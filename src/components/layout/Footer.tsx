@@ -79,12 +79,12 @@ export default function Footer() {
         {/* Institutions + company */}
         <div>
           <p className="eyebrow text-white/40 mb-4">Our Institutions</p>
-          <ul className="space-y-2.5 mb-8">
+          <ul className="space-y-1 md:space-y-2.5 mb-8">
             {institutions.map((inst) => (
               <li key={inst.id}>
                 <Link
                   href={inst.href}
-                  className="group inline-flex items-start gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+                  className="group inline-flex items-start gap-1.5 py-2 md:py-0 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   <span>
                     {inst.name}
@@ -96,7 +96,7 @@ export default function Footer() {
           </ul>
 
           <p className="eyebrow text-white/40 mb-4">Company</p>
-          <ul className="space-y-2.5">
+          <ul className="space-y-1 md:space-y-2.5">
             {[
               { label: "About", href: "/#about" },
               { label: "Careers", href: "/careers" },
@@ -105,7 +105,7 @@ export default function Footer() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="text-sm text-white/70 hover:text-white transition-colors"
+                  className="block py-2.5 md:py-0 text-sm text-white/70 hover:text-white transition-colors"
                 >
                   {link.label}
                 </Link>
@@ -127,13 +127,13 @@ export default function Footer() {
               <div className="space-y-1">
                 <a
                   href={`tel:${siteConfig.phone.admissions.replace(/\s/g, "")}`}
-                  className="block hover:text-white transition-colors"
+                  className="block py-1.5 md:py-0 hover:text-white transition-colors"
                 >
                   Admissions: {siteConfig.phone.admissions}
                 </a>
                 <a
                   href={`tel:${siteConfig.phone.jobs.replace(/\s/g, "")}`}
-                  className="block hover:text-white transition-colors"
+                  className="block py-1.5 md:py-0 hover:text-white transition-colors"
                 >
                   Careers: {siteConfig.phone.jobs}
                 </a>
@@ -152,10 +152,16 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-5 flex flex-col sm:flex-row justify-between items-center gap-2 text-xs text-white/35">
           <span>© {year} Rainbow Group of Companies · Thane (W), Maharashtra</span>
           <div className="flex items-center gap-5">
-            <Link href="/privacy" className="hover:text-white/70 transition-colors">
+            <Link
+              href="/privacy"
+              className="inline-block py-2.5 md:py-0 hover:text-white/70 transition-colors"
+            >
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-white/70 transition-colors">
+            <Link
+              href="/terms"
+              className="inline-block py-2.5 md:py-0 hover:text-white/70 transition-colors"
+            >
               Terms of Use
             </Link>
           </div>

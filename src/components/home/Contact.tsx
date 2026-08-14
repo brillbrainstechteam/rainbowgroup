@@ -56,13 +56,13 @@ export default function Contact() {
         <>
           <a
             href={`tel:${siteConfig.phone.admissions.replace(/\s/g, "")}`}
-            className="block text-sm text-[var(--color-ink)] hover:text-[var(--color-navy)] transition-colors"
+            className="block py-1.5 md:py-0 text-sm text-[var(--color-ink)] hover:text-[var(--color-navy)] transition-colors"
           >
             {siteConfig.phone.admissions}
           </a>
           <a
             href={`tel:${siteConfig.phone.jobs.replace(/\s/g, "")}`}
-            className="block text-sm text-[var(--color-muted)] hover:text-[var(--color-navy)] transition-colors"
+            className="block py-1.5 md:py-0 text-sm text-[var(--color-muted)] hover:text-[var(--color-navy)] transition-colors"
           >
             {siteConfig.phone.jobs}
           </a>
