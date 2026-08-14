@@ -56,7 +56,7 @@ export default function LegalPage({
             <div className="mb-8">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 py-2 md:py-0 text-white/60 text-sm hover:text-white transition-colors"
               >
                 <ArrowLeft size={14} />
                 Back to Home

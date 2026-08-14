@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans } from "next/font/google";
+import SpectrumProgress from "@/components/ui/SpectrumProgress";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -48,7 +49,10 @@ export default function RootLayout({
       lang="en"
       className={`${playfair.variable} ${dmSans.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">
+        <SpectrumProgress />
+        {children}
+      </body>
     </html>
   );
 }

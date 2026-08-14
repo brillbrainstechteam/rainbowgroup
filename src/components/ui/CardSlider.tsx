@@ -116,9 +116,10 @@ export default function CardSlider({
         <ChevronRight size={18} />
       </button>
 
-      {/* Dots — the only progress cue on touch devices */}
+      {/* Dots — the only progress cue on touch devices.
+          The button carries a 44px tap target; the visible pill stays 10px. */}
       <div
-        className={`flex justify-center gap-2 mt-6 transition-opacity ${
+        className={`flex justify-center items-center gap-1 mt-3 transition-opacity ${
           scrollable ? "opacity-100" : "hidden"
         }`}
       >
@@ -129,17 +130,21 @@ export default function CardSlider({
             onClick={() => goTo(i)}
             aria-label={`Go to slide ${i + 1}`}
             aria-current={i === active}
-            className="h-2.5 rounded-full transition-all duration-300"
-            style={{
-              width: i === active ? 26 : 10,
-              background:
-                i === active
-                  ? "var(--gradient-spectrum)"
-                  : dark
-                    ? "rgba(255,255,255,0.25)"
-                    : "var(--color-line)",
-            }}
-          />
+            className="flex items-center justify-center h-11 px-1.5"
+          >
+            <span
+              className="block h-2.5 rounded-full transition-all duration-300"
+              style={{
+                width: i === active ? 26 : 10,
+                background:
+                  i === active
+                    ? "var(--gradient-spectrum)"
+                    : dark
+                      ? "rgba(255,255,255,0.25)"
+                      : "var(--color-line)",
+              }}
+            />
+          </button>
         ))}
       </div>
     </div>

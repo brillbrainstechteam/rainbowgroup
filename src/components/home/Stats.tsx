@@ -6,6 +6,9 @@ import { stats } from "@/data/site";
 
 const icons = [Users, Briefcase, CalendarDays, MapPin];
 
+// One spectrum hue per stat, so the band itself reads as a rainbow.
+const HUES = ["#7C6BD8", "#4B7FD8", "#35AEA0", "#E0AB4A"];
+
 function useInView(threshold = 0.3) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
@@ -63,6 +66,9 @@ export default function Stats() {
       ref={ref}
       className="relative py-14 overflow-hidden bg-gradient-to-r from-[var(--color-navy-deep)] via-[var(--color-navy)] to-[var(--color-navy-deep)]"
     >
+      {/* Spectrum edge marks the transition out of the hero */}
+      <div className="absolute top-0 inset-x-0 spectrum-edge" />
+
       {/* Texture */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -85,7 +91,10 @@ export default function Stats() {
                 }`}
                 style={{ transitionDelay: `${i * 110}ms` }}
               >
-                <span className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-4 group-hover:bg-[var(--color-coral)] transition-colors duration-300">
+                <span
+                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
+                  style={{ backgroundColor: HUES[i % HUES.length] }}
+                >
                   <Icon size={17} className="text-white" />
                 </span>
                 <span className="font-serif text-4xl md:text-5xl text-white tabular-nums">

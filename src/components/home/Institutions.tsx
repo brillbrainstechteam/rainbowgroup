@@ -93,6 +93,8 @@ export default function Institutions() {
                 custom={3 + i}
                 className="group relative rounded-3xl overflow-hidden bg-white border border-[var(--color-line-light)] shadow-[0_2px_20px_-8px_rgba(40,48,74,0.15)] hover:shadow-[0_30px_70px_-25px_rgba(40,48,74,0.45)] hover:-translate-y-1.5 transition-all duration-300"
               >
+                {/* Always-on spectrum cap ties the cards to the theme */}
+                <span className="absolute top-0 inset-x-0 h-1 z-10 spectrum-edge" />
                 {/* Photo */}
                 <Link href={inst.href} className="block relative h-64 overflow-hidden">
                   <Image

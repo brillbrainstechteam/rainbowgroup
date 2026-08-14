@@ -6,6 +6,7 @@ import { institutions, siteConfig } from "@/data/site";
 import { institutionPhotos, PHOTO_DISCLAIMER } from "@/data/images";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
 import CardSlider from "@/components/ui/CardSlider";
+import SpectrumArc from "@/components/ui/SpectrumArc";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
@@ -82,6 +83,12 @@ export default async function InstitutionPage({ params }: Props) {
           <div className="absolute inset-0 text-white">
             <EduPattern opacity={0.07} scale={280} id="instHeroPattern" />
           </div>
+          <SpectrumArc
+            className="left-1/2 -translate-x-1/2 bottom-0 w-[180%] sm:w-[120%] lg:w-[80%] h-auto"
+            opacity={0.35}
+            weight={2}
+          />
+          <div className="absolute bottom-0 inset-x-0 spectrum-edge z-10" />
 
           <div
             className="absolute -top-24 -right-24 w-[500px] h-[500px] opacity-20 animate-blob pointer-events-none"
@@ -91,7 +98,7 @@ export default async function InstitutionPage({ params }: Props) {
           <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
             <Link
               href="/#institutions"
-              className="inline-flex items-center gap-2 text-white/60 text-sm mb-8 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 py-2 md:py-0 text-white/60 text-sm mb-8 hover:text-white transition-colors"
             >
               <ArrowLeft size={14} />
               Back to Rainbow Group

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, GraduationCap, Sparkles } from "lucide-react";
 import { homePhotos as photos } from "@/data/images";
+import SpectrumArc from "@/components/ui/SpectrumArc";
 import { EASE_OUT } from "@/lib/motion";
 
 const fadeUp = {
@@ -26,18 +27,29 @@ export default function Hero() {
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1d3067] via-[#222f5c] to-[#141f42]" />
 
-        {/* Morphing coral glow */}
+        {/* Spectrum aurora — soft, wide, and masked to a soft ellipse so the
+            rainbow is felt across the whole hero without banding. */}
         <div
-          className="absolute -top-40 -right-32 w-[620px] h-[620px] opacity-[0.22] animate-blob"
-          style={{ background: "radial-gradient(circle, #F54029 0%, transparent 68%)" }}
-        />
-        {/* Cool accent glow */}
-        <div
-          className="absolute -bottom-40 -left-32 w-[560px] h-[560px] opacity-[0.16] animate-blob"
+          className="absolute -top-[30%] left-1/2 -translate-x-1/2 w-[150%] h-[95%] opacity-[0.3] blur-[90px]"
           style={{
-            background: "radial-gradient(circle, #9DAFD4 0%, transparent 70%)",
-            animationDelay: "-7s",
+            background: "var(--gradient-spectrum)",
+            maskImage: "radial-gradient(ellipse at 50% 55%, black 0%, transparent 68%)",
+            WebkitMaskImage: "radial-gradient(ellipse at 50% 55%, black 0%, transparent 68%)",
           }}
+        />
+
+        {/* The rainbow itself — concentric arcs rising behind the content */}
+        <SpectrumArc
+          className="left-1/2 -translate-x-1/2 bottom-0 w-[190%] sm:w-[130%] lg:w-[95%] h-auto"
+          opacity={0.4}
+          weight={2}
+          animate
+        />
+
+        {/* Morphing coral glow keeps the brand warmth in the mix */}
+        <div
+          className="absolute -top-40 -right-32 w-[620px] h-[620px] opacity-[0.18] animate-blob"
+          style={{ background: "radial-gradient(circle, #F54029 0%, transparent 68%)" }}
         />
 
         {/* Grid */}

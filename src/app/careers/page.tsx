@@ -10,6 +10,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import CardSlider from "@/components/ui/CardSlider";
+import SpectrumArc from "@/components/ui/SpectrumArc";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
 import InterestForm from "./InterestForm";
 import type { Metadata } from "next";
@@ -79,6 +80,12 @@ export default function CareersPage() {
           <div className="absolute inset-0 text-white">
             <EduPattern opacity={0.07} scale={280} id="careersHeroPattern" />
           </div>
+          <SpectrumArc
+            className="left-1/2 -translate-x-1/2 bottom-0 w-[180%] sm:w-[120%] lg:w-[80%] h-auto"
+            opacity={0.35}
+            weight={2}
+          />
+          <div className="absolute bottom-0 inset-x-0 spectrum-edge z-10" />
           <div
             className="absolute -top-24 -right-20 w-[520px] h-[520px] opacity-20 animate-blob pointer-events-none"
             style={{ background: "radial-gradient(circle, #F54029 0%, transparent 70%)" }}
@@ -89,7 +96,7 @@ export default function CareersPage() {
             <div className="mb-8">
               <Link
                 href="/"
-                className="inline-flex items-center gap-2 text-white/60 text-sm hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 py-2 md:py-0 text-white/60 text-sm hover:text-white transition-colors"
               >
                 <ArrowLeft size={14} />
                 Back to Rainbow Group
@@ -347,7 +354,7 @@ export default function CareersPage() {
                   <p className="eyebrow text-[var(--color-muted)] mb-1">Careers Line</p>
                   <a
                     href={`tel:${siteConfig.phone.jobs.replace(/\s/g, "")}`}
-                    className="text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-navy)] transition-colors"
+                    className="inline-block py-1.5 md:py-0 text-sm font-medium text-[var(--color-ink)] hover:text-[var(--color-navy)] transition-colors"
                   >
                     {siteConfig.phone.jobs}
                   </a>
