@@ -172,7 +172,7 @@ export default async function InstitutionPage({ params }: Props) {
                 />
               </div>
               {/* Floating age badge */}
-              <div className="absolute -bottom-5 -left-5 glass-light rounded-2xl px-5 py-4 shadow-xl animate-float">
+              <div className="absolute -bottom-4 left-0 lg:-bottom-5 lg:-left-5 glass-light rounded-2xl px-5 py-4 shadow-xl animate-float">
                 <p className="font-serif text-lg text-[var(--color-ink)] leading-none">
                   {inst.ageRange}
                 </p>
@@ -235,8 +235,14 @@ export default async function InstitutionPage({ params }: Props) {
               {galleryPhotos[inst.id].map((p, i) => (
                 <div
                   key={i}
-                  className={`relative rounded-2xl overflow-hidden group ${
-                    i === 0 ? "col-span-2 row-span-2 aspect-[4/3] lg:aspect-auto lg:h-full" : "aspect-square"
+                  className={`relative rounded-2xl overflow-hidden group aspect-square ${
+                    // Featured 2x2 tile only from lg — on a 2-col phone grid it
+                    // would push the 4th image into an orphan row.
+                    i === 0 ? "lg:col-span-2 lg:row-span-2 lg:aspect-auto lg:h-full" : ""
+                  } ${
+                    // The 5th image completes the 8-cell desktop mosaic, but would
+                    // leave a lone tile on the 2-col phone grid.
+                    i === 4 ? "hidden lg:block" : ""
                   }`}
                 >
                   <Image
