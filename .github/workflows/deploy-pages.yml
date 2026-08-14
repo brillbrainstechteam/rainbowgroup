@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+# Publishes the `rainbow` branch to https://brillbrainstechteam.github.io/rainbowgroup/
+#
+# GitHub Pages serves one site per repository, so only one branch can be
+# published here. `main` continues to deploy to Vercel. To publish `main`
+# instead, change the branch below.
+on:
+  push:
+    branches: [rainbow]
+  workflow_dispatch:
+
+# Allow the workflow to publish to Pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let an in-flight deploy finish rather than cancelling it mid-publish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static export
+        env:
+          STATIC_EXPORT: "true"
+          # Project Pages live under /<repo>
+          BASE_PATH: /rainbowgroup
+        run: npm run build
+
+      # Without this, GitHub would run the output through Jekyll, which strips
+      # the _next directory because it begins with an underscore.
+      - name: Disable Jekyll
+        run: touch out/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
