@@ -11,6 +11,12 @@ import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import CardSlider from "@/components/ui/CardSlider";
 import SpectrumArc from "@/components/ui/SpectrumArc";
+import {
+  SpectrumBeams,
+  SpectrumDotField,
+  SpectrumOrbs,
+  SpectrumWave,
+} from "@/components/ui/SpectrumDecor";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
 import InterestForm from "./InterestForm";
 import type { Metadata } from "next";
@@ -141,6 +147,7 @@ export default function CareersPage() {
           <div className="absolute inset-0 text-[var(--color-navy)]">
             <EduPattern opacity={0.07} scale={300} id="careersWhyPattern" />
           </div>
+          <SpectrumDotField opacity={0.26} size={24} />
 
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="max-w-xl mb-10">
@@ -189,8 +196,9 @@ export default function CareersPage() {
         </section>
 
         {/* ── Life at Rainbow ── */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
+          <SpectrumBeams className="inset-0" opacity={0.2} />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
               <div>
                 <p className="eyebrow text-[var(--color-coral)] mb-3 flex items-center gap-3">
@@ -239,8 +247,10 @@ export default function CareersPage() {
         </section>
 
         {/* ── Open positions ── */}
-        <section className="py-16 md:py-20 bg-[var(--color-bg-warm)]">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="relative py-16 md:py-20 bg-[var(--color-bg-warm)] overflow-hidden">
+          <div className="absolute top-0 inset-x-0 spectrum-edge opacity-70" />
+          <SpectrumOrbs opacity={0.18} count={4} />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-8">
               <div>
                 <p className="eyebrow text-[var(--color-coral)] mb-3 flex items-center gap-3">
@@ -328,6 +338,8 @@ export default function CareersPage() {
           <div className="absolute inset-0 text-[var(--color-coral)]">
             <EduPattern opacity={0.06} scale={320} id="interestPattern" />
           </div>
+          <SpectrumOrbs opacity={0.24} count={5} />
+          <SpectrumWave className="top-0 inset-x-0 h-20 w-full" opacity={0.28} amp={14} />
 
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
             <div className="lg:sticky lg:top-28">

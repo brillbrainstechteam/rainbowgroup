@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import { MapPin, Phone, Clock, Send, CheckCircle, ExternalLink, MessageCircle } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
+import { SpectrumDotField, SpectrumWave } from "@/components/ui/SpectrumDecor";
 import { EASE_OUT } from "@/lib/motion";
 
 const fadeUp = {
@@ -91,6 +92,14 @@ export default function Contact() {
       <div className="absolute inset-0 text-[var(--color-navy)]">
         <EduPattern opacity={0.07} scale={300} id="contactPattern" />
       </div>
+      {/* Finer dot field than Campus Life, so the two never read as identical */}
+      <SpectrumDotField opacity={0.22} size={30} />
+      <SpectrumWave
+        className="bottom-0 inset-x-0 h-24 w-full"
+        opacity={0.3}
+        weight={2}
+        amp={16}
+      />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Header row — heading left, quick actions right ── */}

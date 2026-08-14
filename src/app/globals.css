@@ -188,6 +188,21 @@ h1, h2, h3, h4, h5, h6 {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
+/* Slow lateral drift for wave / beam decor */
+@keyframes drift {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+/* Gentle hue breathing for orb fields */
+@keyframes breathe {
+  0%, 100% { transform: scale(1) translate(0, 0); opacity: 0.55; }
+  50%      { transform: scale(1.18) translate(2%, -3%); opacity: 0.85; }
+}
+/* Prism beams sweeping */
+@keyframes beamSweep {
+  0%, 100% { opacity: 0.35; transform: translateX(0) skewX(-14deg); }
+  50%      { opacity: 0.6; transform: translateX(4%) skewX(-14deg); }
+}
 
 .animate-float      { animation: float 6s ease-in-out infinite; }
 .animate-float-slow { animation: floatSlow 11s ease-in-out infinite; }

@@ -8,6 +8,7 @@ import { ArrowRight, GraduationCap, Smile, Sparkles } from "lucide-react";
 import { institutions } from "@/data/site";
 import { homePhotos as photos, PHOTO_DISCLAIMER } from "@/data/images";
 import { EduPattern } from "@/components/ui/EduPattern";
+import { SpectrumBeams } from "@/components/ui/SpectrumDecor";
 import { EASE_OUT } from "@/lib/motion";
 
 const institutionIcons: Record<string, React.ElementType> = {
@@ -38,6 +39,8 @@ export default function Institutions() {
       <div className="absolute inset-0 text-[var(--color-coral)]">
         <EduPattern opacity={0.065} scale={320} id="instPattern" />
       </div>
+      {/* Beam device: angled shafts of prism light across the white section */}
+      <SpectrumBeams className="inset-0" opacity={0.22} />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}

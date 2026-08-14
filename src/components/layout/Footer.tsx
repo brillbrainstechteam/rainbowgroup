@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Phone, MapPin, Clock, ArrowRight, ArrowUpRight } from "lucide-react";
 import { siteConfig, institutions } from "@/data/site";
 import { EduPattern } from "@/components/ui/EduPattern";
+import { SpectrumOrbs } from "@/components/ui/SpectrumDecor";
 
 function LinkedInIcon({ size = 14 }: { size?: number }) {
   return (
@@ -22,6 +23,7 @@ export default function Footer() {
       <div className="absolute inset-0 text-white">
         <EduPattern opacity={0.05} scale={300} id="footerPattern" />
       </div>
+      <SpectrumOrbs opacity={0.26} count={5} />
       <div
         className="absolute -top-32 right-0 w-[460px] h-[460px] opacity-[0.13] animate-blob pointer-events-none"
         style={{ background: "radial-gradient(circle, #F54029 0%, transparent 70%)" }}

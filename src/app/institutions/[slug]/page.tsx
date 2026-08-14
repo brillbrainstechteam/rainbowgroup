@@ -7,6 +7,12 @@ import { institutionPhotos, PHOTO_DISCLAIMER } from "@/data/images";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
 import CardSlider from "@/components/ui/CardSlider";
 import SpectrumArc from "@/components/ui/SpectrumArc";
+import {
+  SpectrumBeams,
+  SpectrumDotField,
+  SpectrumOrbs,
+  SpectrumWave,
+} from "@/components/ui/SpectrumDecor";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
@@ -147,7 +153,10 @@ export default async function InstitutionPage({ params }: Props) {
             </div>
             <div className="flex items-center gap-2">
               <span className="font-medium text-[var(--color-ink)]">Part of:</span>
-              <Link href="/" className={`${accentText} hover:underline`}>
+              <Link
+                href="/"
+                className={`inline-block py-2 md:py-0 ${accentText} hover:underline`}
+              >
                 Rainbow Group of Companies
               </Link>
             </div>
@@ -155,8 +164,13 @@ export default async function InstitutionPage({ params }: Props) {
         </section>
 
         {/* ── About ── */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
+          <SpectrumWave
+            className="bottom-0 inset-x-0 h-24 w-full"
+            opacity={0.32}
+            amp={16}
+          />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
               <p className={`eyebrow ${accentText} mb-4 flex items-center gap-3`}>
                 <span className="w-8 h-px" style={{ backgroundColor: accent }} />
@@ -203,6 +217,7 @@ export default async function InstitutionPage({ params }: Props) {
           <div className="absolute inset-0" style={{ color: accent }}>
             <EduPattern opacity={0.07} scale={300} id="instHighlightPattern" />
           </div>
+          <SpectrumBeams className="inset-0" opacity={0.22} />
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="text-center mb-10">
               <p className={`eyebrow ${accentText} mb-3`}>What We Offer</p>
@@ -239,8 +254,9 @@ export default async function InstitutionPage({ params }: Props) {
         </section>
 
         {/* ── Programmes slider ── */}
-        <section className="py-16 md:py-20 bg-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
+          <SpectrumDotField opacity={0.28} size={26} />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="max-w-lg mb-10">
               <p className="eyebrow text-[var(--color-muted)] mb-4 flex items-center gap-3">
                 <span className="spectrum-rule" />
@@ -288,8 +304,10 @@ export default async function InstitutionPage({ params }: Props) {
         </section>
 
         {/* ── Gallery ── */}
-        <section className="py-16 md:py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <section className="relative py-16 md:py-20 bg-white overflow-hidden">
+          {/* Gallery is image-dense — a single spectrum rule is enough here */}
+          <div className="absolute top-0 inset-x-0 spectrum-edge opacity-70" />
+          <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="flex items-end justify-between gap-6 mb-8">
               <div>
                 <p className={`eyebrow ${accentText} mb-3`}>Campus Life</p>
@@ -337,6 +355,7 @@ export default async function InstitutionPage({ params }: Props) {
             className="absolute inset-0 opacity-90"
             style={{ background: `linear-gradient(120deg, ${accent} 0%, var(--color-navy-deep) 75%)` }}
           />
+          <SpectrumOrbs opacity={0.35} count={6} />
           <div
             className="absolute -bottom-32 -left-24 w-[480px] h-[480px] opacity-20 animate-blob pointer-events-none"
             style={{ background: "radial-gradient(circle, #F54029 0%, transparent 70%)" }}
@@ -381,7 +400,7 @@ export default async function InstitutionPage({ params }: Props) {
                     <p className="eyebrow text-white/45 mb-1">Admissions</p>
                     <a
                       href={`tel:${siteConfig.phone.admissions.replace(/\s/g, "")}`}
-                      className="text-white hover:underline"
+                      className="inline-block py-1.5 md:py-0 text-white hover:underline"
                     >
                       {siteConfig.phone.admissions}
                     </a>

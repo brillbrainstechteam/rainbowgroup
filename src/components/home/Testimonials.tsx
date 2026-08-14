@@ -35,9 +35,12 @@ export default function Testimonials() {
       ref={ref}
       className="relative py-16 md:py-20 bg-[var(--color-bg-warm)] overflow-hidden"
     >
+      {/* This section's device is the spectrum glyph pattern itself — the only
+          place the education icons are drawn in full colour. */}
       <div className="absolute inset-0">
-        <EduPattern opacity={0.09} scale={320} id="testimonialPattern" spectrum />
+        <EduPattern opacity={0.16} scale={300} id="testimonialPattern" spectrum />
       </div>
+      <div className="absolute top-0 inset-x-0 spectrum-edge opacity-70" />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-xl mb-10">

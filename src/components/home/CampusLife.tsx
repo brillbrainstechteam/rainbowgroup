@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { homePhotos, PHOTO_DISCLAIMER } from "@/data/images";
 import CardSlider from "@/components/ui/CardSlider";
+import { SpectrumDotField } from "@/components/ui/SpectrumDecor";
 import { EASE_OUT } from "@/lib/motion";
 
 const fadeUp = {
@@ -31,8 +32,11 @@ export default function CampusLife() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-16 md:py-20 bg-[var(--color-bg)] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+    <section ref={ref} className="relative py-16 md:py-20 bg-[var(--color-bg)] overflow-hidden">
+      {/* Dot-field device: a mesh of rainbow dots behind the slider */}
+      <SpectrumDotField opacity={0.3} size={22} />
+
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-5 mb-10">
           <div className="max-w-lg">
             <motion.p

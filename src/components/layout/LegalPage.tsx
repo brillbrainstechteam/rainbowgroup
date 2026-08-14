@@ -4,6 +4,7 @@ import { ArrowLeft, Phone, Mail, FileText } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
+import { SpectrumOrbs, SpectrumWave } from "@/components/ui/SpectrumDecor";
 import { legalPhotos } from "@/data/images";
 import { siteConfig } from "@/data/site";
 
@@ -78,8 +79,10 @@ export default function LegalPage({
         </section>
 
         {/* ── Body ── */}
-        <section className="py-16 md:py-20 bg-[var(--color-bg-warm)]">
-          <div className="max-w-5xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[1.6fr_1fr] gap-8 items-start">
+        <section className="relative py-16 md:py-20 bg-[var(--color-bg-warm)] overflow-hidden">
+          <SpectrumOrbs opacity={0.2} count={4} />
+          <SpectrumWave className="top-0 inset-x-0 h-20 w-full" opacity={0.3} amp={14} />
+          <div className="relative max-w-5xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[1.6fr_1fr] gap-8 items-start">
             {/* Content */}
             <div className="space-y-5">
               {/* Placeholder notice */}
@@ -142,7 +145,7 @@ export default function LegalPage({
                       <p className="eyebrow text-white/45 mb-1">Call us</p>
                       <a
                         href={`tel:${siteConfig.phone.admissions.replace(/\s/g, "")}`}
-                        className="text-white hover:underline"
+                        className="inline-block py-1.5 md:py-0 text-white hover:underline"
                       >
                         {siteConfig.phone.admissions}
                       </a>
@@ -154,7 +157,10 @@ export default function LegalPage({
                     </span>
                     <div>
                       <p className="eyebrow text-white/45 mb-1">Enquiry form</p>
-                      <Link href="/#contact" className="text-white hover:underline">
+                      <Link
+                        href="/#contact"
+                        className="inline-block py-1.5 md:py-0 text-white hover:underline"
+                      >
                         Send us a message
                       </Link>
                     </div>

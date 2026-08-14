@@ -6,6 +6,7 @@ import Image from "next/image";
 import { pillars } from "@/data/site";
 import { homePhotos as photos } from "@/data/images";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
+import { SpectrumOrbs } from "@/components/ui/SpectrumDecor";
 import { EASE_OUT } from "@/lib/motion";
 import { BookOpen, Sprout, Heart, Compass } from "lucide-react";
 
@@ -46,6 +47,8 @@ export default function About() {
       <div className="absolute inset-0 text-[var(--color-navy)]">
         <EduPattern opacity={0.075} scale={300} id="aboutPattern" />
       </div>
+      {/* Orb device: a soft mesh of colour blooming behind the copy */}
+      <SpectrumOrbs opacity={0.24} count={5} />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         {/* ── Intro: collage + copy ── */}

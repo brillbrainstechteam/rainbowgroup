@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Users, Briefcase, CalendarDays, MapPin } from "lucide-react";
 import { stats } from "@/data/site";
+import { SpectrumWave } from "@/components/ui/SpectrumDecor";
 
 const icons = [Users, Briefcase, CalendarDays, MapPin];
 
@@ -68,6 +69,9 @@ export default function Stats() {
     >
       {/* Spectrum edge marks the transition out of the hero */}
       <div className="absolute top-0 inset-x-0 spectrum-edge" />
+
+      {/* Wave device: a rainbow signal running the length of the band */}
+      <SpectrumWave className="inset-0 w-full h-full" opacity={0.3} weight={2} amp={20} />
 
       {/* Texture */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.05]" xmlns="http://www.w3.org/2000/svg">

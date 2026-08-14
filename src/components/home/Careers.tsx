@@ -8,6 +8,7 @@ import { ArrowRight, Sparkles, TrendingUp, Users, Award } from "lucide-react";
 import { careers } from "@/data/site";
 import { homePhotos as photos } from "@/data/images";
 import { EduPattern } from "@/components/ui/EduPattern";
+import { SpectrumOrbs } from "@/components/ui/SpectrumDecor";
 import { EASE_OUT } from "@/lib/motion";
 
 function LinkedInIcon({ size = 14 }: { size?: number }) {
@@ -59,6 +60,8 @@ export default function Careers() {
       <div className="absolute inset-0 text-white">
         <EduPattern opacity={0.06} scale={280} id="careersHomePattern" />
       </div>
+      {/* Orbs read as an aurora against the navy — same device, different mood */}
+      <SpectrumOrbs opacity={0.4} count={6} />
 
       <div
         className="absolute right-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-[0.14] animate-blob pointer-events-none"
