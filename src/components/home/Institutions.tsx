@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, GraduationCap, Smile, Sparkles } from "lucide-react";
 import { institutions } from "@/data/site";
-import { photos, PHOTO_DISCLAIMER } from "@/data/images";
+import { homePhotos as photos, PHOTO_DISCLAIMER } from "@/data/images";
 import { EduPattern } from "@/components/ui/EduPattern";
 import { EASE_OUT } from "@/lib/motion";
 
@@ -50,7 +50,7 @@ export default function Institutions() {
               custom={0}
               className="eyebrow text-[var(--color-coral)] mb-4 flex items-center gap-3"
             >
-              <span className="w-8 h-px bg-[var(--color-coral)]" />
+              <span className="spectrum-rule" />
               Our Institutions
             </motion.p>
             <motion.h2

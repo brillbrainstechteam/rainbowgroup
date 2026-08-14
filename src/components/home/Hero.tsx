@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MapPin, GraduationCap, Sparkles } from "lucide-react";
-import { photos } from "@/data/images";
+import { homePhotos as photos } from "@/data/images";
 import { EASE_OUT } from "@/lib/motion";
 
 const fadeUp = {
@@ -81,7 +81,7 @@ export default function Hero() {
               <br />
               institutions.
               <br />
-              <span className="text-gradient-warm">Nurturing</span> generations.
+              <span className="text-spectrum">Nurturing</span> generations.
             </motion.h1>
 
             <motion.p
@@ -127,7 +127,7 @@ export default function Hero() {
               className="flex items-center gap-4"
             >
               <div className="flex -space-x-2.5">
-                {photos.gallery.slice(0, 3).map((p, i) => (
+                {photos.avatars.map((p, i) => (
                   <span
                     key={i}
                     className="relative w-9 h-9 rounded-full overflow-hidden border-2 border-white/25"

@@ -3,8 +3,9 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Phone, MapPin, CheckCircle, ArrowRight } from "lucide-react";
 import { institutions, siteConfig } from "@/data/site";
-import { photos, PHOTO_DISCLAIMER } from "@/data/images";
+import { institutionPhotos, PHOTO_DISCLAIMER } from "@/data/images";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
+import CardSlider from "@/components/ui/CardSlider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
@@ -12,18 +13,24 @@ import type { Metadata } from "next";
 
 type Props = { params: Promise<{ slug: string }> };
 
-const heroPhoto: Record<string, string> = {
-  "rainbow-international-school": photos.schoolFeature,
-  "rainbow-preschool-international": photos.preschoolFeature,
+// Programme captions per institution — descriptive of the imagery only.
+// Anything curriculum-specific stays a client placeholder in site.ts.
+const programmeCaptions: Record<string, string[]> = {
+  "rainbow-international-school": [
+    "Enquiry-led learning",
+    "Libraries and research",
+    "Creative expression",
+    "Sport and teamwork",
+  ],
+  "rainbow-preschool-international": [
+    "Play-based discovery",
+    "Early literacy",
+    "Art and making",
+    "Movement and music",
+  ],
 };
-const aboutPhoto: Record<string, string> = {
-  "rainbow-international-school": photos.schoolCard,
-  "rainbow-preschool-international": photos.preschoolCard,
-};
-const galleryPhotos: Record<string, string[]> = {
-  "rainbow-international-school": photos.gallery,
-  "rainbow-preschool-international": photos.galleryPreschool,
-};
+
+const SPECTRUM = ["#6A5AC8", "#3E6FCB", "#2E9C8E", "#7DA24C", "#D9A441", "#C4604F"];
 
 export async function generateStaticParams() {
   return institutions.map((inst) => ({ slug: inst.id }));
@@ -44,6 +51,8 @@ export default async function InstitutionPage({ params }: Props) {
   const inst = institutions.find((i) => i.id === slug);
   if (!inst) notFound();
 
+  const pics = institutionPhotos[inst.id];
+  const captions = programmeCaptions[inst.id] ?? [];
   const isNavy = inst.color === "navy";
   const accent = isNavy ? "var(--color-navy)" : "var(--color-coral)";
   const accentText = isNavy ? "text-[var(--color-navy)]" : "text-[var(--color-coral)]";
@@ -57,7 +66,7 @@ export default async function InstitutionPage({ params }: Props) {
         <section className="relative pt-32 pb-20 overflow-hidden bg-[var(--color-navy-deep)]">
           <div className="absolute inset-0">
             <Image
-              src={heroPhoto[inst.id]}
+              src={pics.hero}
               alt=""
               fill
               priority
@@ -164,7 +173,7 @@ export default async function InstitutionPage({ params }: Props) {
               />
               <div className="absolute inset-0 rounded-[2rem] overflow-hidden shadow-[0_30px_70px_-25px_rgba(40,48,74,0.45)]">
                 <Image
-                  src={aboutPhoto[inst.id]}
+                  src={pics.about}
                   alt={`Learning at ${inst.name}`}
                   fill
                   sizes="(max-width: 1024px) 100vw, 45vw"
@@ -202,10 +211,13 @@ export default async function InstitutionPage({ params }: Props) {
                 >
                   <span
                     className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full transition-all duration-500"
-                    style={{ backgroundColor: accent }}
+                    style={{ backgroundColor: SPECTRUM[i % SPECTRUM.length] }}
                   />
-                  <div className={`w-11 h-11 rounded-xl ${tintBg} flex items-center justify-center mb-4`}>
-                    <CheckCircle size={18} className={accentText} />
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                    style={{ backgroundColor: SPECTRUM[i % SPECTRUM.length] + "1A" }}
+                  >
+                    <CheckCircle size={18} style={{ color: SPECTRUM[i % SPECTRUM.length] }} />
                   </div>
                   <h3 className="text-sm font-semibold text-[var(--color-ink)] mb-2">
                     {item.title}
@@ -216,6 +228,55 @@ export default async function InstitutionPage({ params }: Props) {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* ── Programmes slider ── */}
+        <section className="py-16 md:py-20 bg-white overflow-hidden">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="max-w-lg mb-10">
+              <p className="eyebrow text-[var(--color-muted)] mb-4 flex items-center gap-3">
+                <span className="spectrum-rule" />
+                Programmes
+              </p>
+              <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-ink)] leading-[1.15] mb-3">
+                How learning happens
+              </h2>
+              <p className="text-[15px] text-[var(--color-muted)] leading-relaxed">
+                [Programme detail to be confirmed by client] — the slider below
+                shows how each strand would be presented.
+              </p>
+            </div>
+
+            <CardSlider
+              label={`${inst.shortName} programmes`}
+              itemClass="w-[70%] sm:w-[42%] lg:w-[26%]"
+            >
+              {pics.programmes.map((p, i) => (
+                <figure
+                  key={i}
+                  className="group relative rounded-3xl overflow-hidden aspect-[3/4]"
+                >
+                  <Image
+                    src={p}
+                    alt={captions[i] ?? `${inst.name} programme ${i + 1}`}
+                    fill
+                    sizes="(max-width: 640px) 70vw, (max-width: 1024px) 42vw, 26vw"
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy-deep)]/90 via-[var(--color-navy-deep)]/15 to-transparent" />
+                  <figcaption className="absolute inset-x-0 bottom-0 p-5">
+                    <span
+                      className="block w-8 h-1 rounded-full mb-3"
+                      style={{ backgroundColor: SPECTRUM[i % SPECTRUM.length] }}
+                    />
+                    <span className="font-serif text-lg text-white leading-snug">
+                      {captions[i] ?? `Programme ${i + 1}`}
+                    </span>
+                  </figcaption>
+                </figure>
+              ))}
+            </CardSlider>
           </div>
         </section>
 
@@ -232,7 +293,7 @@ export default async function InstitutionPage({ params }: Props) {
             </div>
 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {galleryPhotos[inst.id].map((p, i) => (
+              {pics.gallery.map((p, i) => (
                 <div
                   key={i}
                   className={`relative rounded-2xl overflow-hidden group aspect-square ${

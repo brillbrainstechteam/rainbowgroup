@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { pillars } from "@/data/site";
-import { photos } from "@/data/images";
+import { homePhotos as photos } from "@/data/images";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
 import { EASE_OUT } from "@/lib/motion";
 import { BookOpen, Sprout, Heart, Compass } from "lucide-react";
@@ -18,6 +18,15 @@ const glyphMap: Record<string, "book" | "pencil" | "sparkle" | "globe" | "cap"> 
   Heart: "sparkle",
   Compass: "globe",
 };
+
+// One spectrum hue per pillar. Tints are hard-coded rather than mixed at
+// runtime so the pale card backgrounds stay identical across browsers.
+const HUES = [
+  { c: "#6A5AC8", tint: "#EFEDFA" }, // violet
+  { c: "#2E9C8E", tint: "#E6F4F2" }, // teal
+  { c: "#D9A441", tint: "#FBF3E3" }, // amber
+  { c: "#C4604F", tint: "#F9ECE9" }, // rose
+];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 26 },
@@ -91,7 +100,7 @@ export default function About() {
               custom={1}
               className="eyebrow text-[var(--color-coral)] mb-4 flex items-center gap-3"
             >
-              <span className="w-8 h-px bg-[var(--color-coral)]" />
+              <span className="spectrum-rule" />
               Who We Are
             </motion.p>
 
@@ -140,21 +149,31 @@ export default function About() {
                 custom={5 + i}
                 className="group relative p-6 rounded-2xl bg-white border border-[var(--color-line-light)] hover:border-transparent hover:shadow-[0_20px_45px_-18px_rgba(40,48,74,0.28)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
-                {/* Accent bar that grows on hover */}
-                <span className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full bg-gradient-to-r from-[var(--color-coral)] to-[var(--color-coral-light)] transition-all duration-500" />
+                {/* Accent bar that grows on hover, in this pillar's hue */}
+                <span
+                  className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full transition-all duration-500"
+                  style={{ backgroundColor: HUES[i % HUES.length].c }}
+                />
 
                 {/* Watermark glyph */}
                 <EduAccent
                   glyph={glyphMap[pillar.icon] ?? "sparkle"}
-                  className="w-28 h-28 -bottom-4 -right-4 text-[var(--color-navy)] group-hover:text-[var(--color-coral)] transition-colors duration-500"
-                  opacity={0.07}
+                  className="w-28 h-28 -bottom-4 -right-4 transition-opacity duration-500 group-hover:opacity-20"
+                  opacity={0.1}
+                  color={HUES[i % HUES.length].c}
                 />
 
                 <div className="relative flex items-start justify-between mb-4">
-                  <div className="w-11 h-11 rounded-xl bg-[var(--color-navy-pale)] flex items-center justify-center group-hover:bg-[var(--color-navy)] transition-colors duration-300">
-                    <Icon size={19} className="text-[var(--color-navy)] group-hover:text-white transition-colors duration-300" />
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors duration-300"
+                    style={{ backgroundColor: HUES[i % HUES.length].tint }}
+                  >
+                    <Icon size={19} style={{ color: HUES[i % HUES.length].c }} />
                   </div>
-                  <span className="font-serif text-2xl text-[var(--color-line)] group-hover:text-[var(--color-coral)]/30 transition-colors duration-300">
+                  <span
+                    className="font-serif text-2xl opacity-25 transition-opacity duration-300 group-hover:opacity-60"
+                    style={{ color: HUES[i % HUES.length].c }}
+                  >
                     0{i + 1}
                   </span>
                 </div>

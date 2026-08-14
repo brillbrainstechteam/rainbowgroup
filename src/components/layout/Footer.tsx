@@ -17,6 +17,8 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[var(--color-ink)] text-white overflow-hidden">
+      {/* Spectrum hairline caps the page */}
+      <div className="spectrum-edge" />
       <div className="absolute inset-0 text-white">
         <EduPattern opacity={0.05} scale={300} id="footerPattern" />
       </div>

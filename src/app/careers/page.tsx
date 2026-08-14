@@ -5,10 +5,11 @@ import {
   Sparkles, TrendingUp, Users, Award, Heart, Shield,
 } from "lucide-react";
 import { siteConfig, careers } from "@/data/site";
-import { photos, PHOTO_DISCLAIMER } from "@/data/images";
+import { careersPhotos, PHOTO_DISCLAIMER } from "@/data/images";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import CardSlider from "@/components/ui/CardSlider";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
 import InterestForm from "./InterestForm";
 import type { Metadata } from "next";
@@ -37,7 +38,25 @@ const values = [
   { icon: Shield, label: "Stable organisation", desc: "20+ years of institution-building with long-term vision and stability." },
 ];
 
-const lifePhotos = [photos.gallery[0], photos.aboutSecondary, photos.gallery[2], photos.heroSecondary];
+const lifeCaptions = [
+  "Collaborative planning",
+  "Teams that back each other",
+  "Sharing what works",
+  "Room to lead",
+  "Mentoring and review",
+  "Space to think",
+];
+
+// One spectrum hue per value card and per slide caption.
+const HUES = [
+  { c: "#6A5AC8", tint: "#EFEDFA" },
+  { c: "#3E6FCB", tint: "#EAF0FB" },
+  { c: "#2E9C8E", tint: "#E6F4F2" },
+  { c: "#7DA24C", tint: "#F0F5E8" },
+  { c: "#D9A441", tint: "#FBF3E3" },
+  { c: "#C4604F", tint: "#F9ECE9" },
+];
+const LIFE_HUES = HUES.map((h) => h.c);
 
 export default function CareersPage() {
   return (
@@ -48,7 +67,7 @@ export default function CareersPage() {
         <section className="relative pt-32 pb-20 overflow-hidden bg-[var(--color-navy-deep)]">
           <div className="absolute inset-0">
             <Image
-              src={photos.careers}
+              src={careersPhotos.hero}
               alt=""
               fill
               priority
@@ -87,7 +106,7 @@ export default function CareersPage() {
             <h1 className="font-serif text-4xl md:text-6xl text-white leading-[1.05] max-w-3xl mb-6">
               Shape the future
               <br />
-              <span className="text-gradient-warm">with Rainbow.</span>
+              <span className="text-spectrum">with Rainbow.</span>
             </h1>
             <p className="text-lg text-white/60 max-w-2xl leading-relaxed mb-10">
               We are always looking for passionate educators, administrators, and
@@ -119,7 +138,7 @@ export default function CareersPage() {
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
             <div className="max-w-xl mb-10">
               <p className="eyebrow text-[var(--color-coral)] mb-4 flex items-center gap-3">
-                <span className="w-8 h-px bg-[var(--color-coral)]" />
+                <span className="spectrum-rule" />
                 Why Rainbow
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-ink)] leading-[1.15]">
@@ -135,12 +154,21 @@ export default function CareersPage() {
                     key={item.label}
                     className="group relative bg-white rounded-2xl p-6 border border-[var(--color-line-light)] hover:border-transparent hover:shadow-[0_20px_45px_-18px_rgba(40,48,74,0.28)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
                   >
-                    <span className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full bg-gradient-to-r from-[var(--color-coral)] to-[var(--color-coral-light)] transition-all duration-500" />
+                    <span
+                      className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full transition-all duration-500"
+                      style={{ backgroundColor: HUES[i % HUES.length].c }}
+                    />
                     <div className="flex items-start justify-between mb-4">
-                      <span className="w-11 h-11 rounded-xl bg-[var(--color-navy-pale)] flex items-center justify-center group-hover:bg-[var(--color-navy)] transition-colors duration-300">
-                        <Icon size={18} className="text-[var(--color-navy)] group-hover:text-white transition-colors duration-300" />
+                      <span
+                        className="w-11 h-11 rounded-xl flex items-center justify-center"
+                        style={{ backgroundColor: HUES[i % HUES.length].tint }}
+                      >
+                        <Icon size={18} style={{ color: HUES[i % HUES.length].c }} />
                       </span>
-                      <span className="font-serif text-2xl text-[var(--color-line)] group-hover:text-[var(--color-coral)]/30 transition-colors duration-300">
+                      <span
+                        className="font-serif text-2xl opacity-25 transition-opacity duration-300 group-hover:opacity-60"
+                        style={{ color: HUES[i % HUES.length].c }}
+                      >
                         0{i + 1}
                       </span>
                     </div>
@@ -159,7 +187,7 @@ export default function CareersPage() {
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
               <div>
                 <p className="eyebrow text-[var(--color-coral)] mb-3 flex items-center gap-3">
-                  <span className="w-8 h-px bg-[var(--color-coral)]" />
+                  <span className="spectrum-rule" />
                   Life at Rainbow
                 </p>
                 <h2 className="font-serif text-3xl text-[var(--color-ink)]">
@@ -171,26 +199,35 @@ export default function CareersPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              {lifePhotos.map((p, i) => (
-                <div
+            <CardSlider label="Life at Rainbow photographs" itemClass="w-[62%] sm:w-[38%] lg:w-[24%]">
+              {careersPhotos.lifeSlider.map((p, i) => (
+                <figure
                   key={i}
-                  className={`group relative rounded-2xl overflow-hidden ${
-                    i === 1 ? "lg:mt-8" : ""
-                  } ${i === 3 ? "lg:mt-8" : ""} aspect-[4/5]`}
+                  className="group relative rounded-2xl overflow-hidden aspect-[4/5]"
                 >
                   <Image
                     src={p}
-                    alt={`Working at Rainbow Group ${i + 1}`}
+                    alt={lifeCaptions[i]}
                     fill
-                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 62vw, (max-width: 1024px) 38vw, 24vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy-deep)]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-navy-deep)]/85 via-[var(--color-navy-deep)]/10 to-transparent" />
+                  <figcaption className="absolute inset-x-0 bottom-0 p-4 flex items-center gap-2.5">
+                    <span
+                      className="w-1.5 h-6 rounded-full flex-shrink-0"
+                      style={{ backgroundColor: LIFE_HUES[i % LIFE_HUES.length] }}
+                    />
+                    <span className="text-xs font-medium text-white leading-snug">
+                      {lifeCaptions[i]}
+                    </span>
+                  </figcaption>
+                </figure>
               ))}
-            </div>
-            <p className="mt-4 text-[11px] text-[var(--color-muted)]">{PHOTO_DISCLAIMER}</p>
+            </CardSlider>
+            <p className="mt-5 text-[11px] text-[var(--color-muted)] text-center">
+              {PHOTO_DISCLAIMER}
+            </p>
           </div>
         </section>
 
@@ -200,7 +237,7 @@ export default function CareersPage() {
             <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-8">
               <div>
                 <p className="eyebrow text-[var(--color-coral)] mb-3 flex items-center gap-3">
-                  <span className="w-8 h-px bg-[var(--color-coral)]" />
+                  <span className="spectrum-rule" />
                   Open Positions
                 </p>
                 <h2 className="font-serif text-3xl text-[var(--color-ink)]">Current openings</h2>
@@ -288,7 +325,7 @@ export default function CareersPage() {
           <div className="relative max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
             <div className="lg:sticky lg:top-28">
               <p className="eyebrow text-[var(--color-coral)] mb-4 flex items-center gap-3">
-                <span className="w-8 h-px bg-[var(--color-coral)]" />
+                <span className="spectrum-rule" />
                 Express Interest
               </p>
               <h2 className="font-serif text-3xl md:text-4xl text-[var(--color-ink)] leading-[1.15] mb-5">

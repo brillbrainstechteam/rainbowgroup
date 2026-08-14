@@ -103,7 +103,7 @@ export default function Contact() {
               custom={0}
               className="eyebrow text-[var(--color-coral)] mb-4 flex items-center gap-3"
             >
-              <span className="w-8 h-px bg-[var(--color-coral)]" />
+              <span className="spectrum-rule" />
               Get in Touch
             </motion.p>
             <motion.h2

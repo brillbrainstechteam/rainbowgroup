@@ -12,6 +12,7 @@ export default function TermsPage() {
     <LegalPage
       title="Terms of Use"
       accent="coral"
+      image="terms"
       intro="The full Terms of Use are to be drafted by Rainbow Group of Companies' legal team and supplied prior to site launch. This page is reserved as a placeholder so the structure, navigation, and footer links are all in place."
       sections={[
         {

@@ -1,8 +1,10 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, Phone, Mail, FileText } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { EduPattern, EduAccent } from "@/components/ui/EduPattern";
+import { legalPhotos } from "@/data/images";
 import { siteConfig } from "@/data/site";
 
 type Section = { heading: string; items: string[] };
@@ -12,10 +14,18 @@ type Props = {
   intro: string;
   sections: Section[];
   accent?: "navy" | "coral";
+  /** Which quiet hero image to use. */
+  image?: keyof typeof legalPhotos;
 };
 
 /** Shared shell for Privacy Policy / Terms of Use — both are client-supplied placeholders. */
-export default function LegalPage({ title, intro, sections, accent = "navy" }: Props) {
+export default function LegalPage({
+  title,
+  intro,
+  sections,
+  accent = "navy",
+  image = "privacy",
+}: Props) {
   const accentVar = accent === "navy" ? "var(--color-navy)" : "var(--color-coral)";
 
   return (
@@ -24,6 +34,16 @@ export default function LegalPage({ title, intro, sections, accent = "navy" }: P
       <main>
         {/* ── Compact hero ── */}
         <section className="relative pt-32 pb-14 bg-[var(--color-navy-deep)] overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src={legalPhotos[image]}
+              alt=""
+              fill
+              sizes="100vw"
+              className="object-cover opacity-20"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-navy-deep)] via-[var(--color-navy-deep)]/92 to-[var(--color-navy-deep)]/70" />
+          </div>
           <div className="absolute inset-0 text-white">
             <EduPattern opacity={0.06} scale={280} id="legalHeroPattern" />
           </div>

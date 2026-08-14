@@ -6,7 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Sparkles, TrendingUp, Users, Award } from "lucide-react";
 import { careers } from "@/data/site";
-import { photos } from "@/data/images";
+import { homePhotos as photos } from "@/data/images";
 import { EduPattern } from "@/components/ui/EduPattern";
 import { EASE_OUT } from "@/lib/motion";
 
@@ -48,7 +48,7 @@ export default function Careers() {
       {/* Background photograph, heavily tinted */}
       <div className="absolute inset-0">
         <Image
-          src={photos.careers}
+          src={photos.careersStrip}
           alt=""
           fill
           sizes="100vw"
@@ -76,7 +76,7 @@ export default function Careers() {
               custom={0}
               className="eyebrow text-[var(--color-coral-light)] mb-4 flex items-center gap-3"
             >
-              <span className="w-8 h-px bg-[var(--color-coral-light)]" />
+              <span className="spectrum-rule" />
               Work With Us
             </motion.p>
 

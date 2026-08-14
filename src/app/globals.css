@@ -24,6 +24,17 @@
   --color-gold:         #D9A441;
   --color-teal:         #3E8E8A;
 
+  /* ── Refined spectrum ───────────────────────────────────
+     Six muted jewel tones, in rainbow order. Desaturated on purpose:
+     they must read as a considered brand palette, not primary colours,
+     so the group still looks like a holding company and not a nursery. */
+  --color-s1:           #6A5AC8;  /* violet  */
+  --color-s2:           #3E6FCB;  /* blue    */
+  --color-s3:           #2E9C8E;  /* teal    */
+  --color-s4:           #7DA24C;  /* green   */
+  --color-s5:           #D9A441;  /* amber   */
+  --color-s6:           #C4604F;  /* rose    */
+
   /* ── Typography ─────────────────────────────────────────── */
   --font-serif:         var(--font-playfair), "Playfair Display", Georgia, serif;
   --font-sans:          var(--font-dm-sans), "DM Sans", system-ui, sans-serif;
@@ -75,6 +86,56 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ── Spectrum ────────────────────────────────────────────── */
+:root {
+  --gradient-spectrum: linear-gradient(
+    90deg,
+    #6A5AC8 0%, #3E6FCB 20%, #2E9C8E 40%,
+    #7DA24C 60%, #D9A441 80%, #C4604F 100%
+  );
+}
+
+.text-spectrum {
+  background: var(--gradient-spectrum);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Short gradient rule used beside every section eyebrow */
+.spectrum-rule {
+  display: inline-block;
+  width: 2rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gradient-spectrum);
+}
+
+/* Full-width hairline that separates major sections */
+.spectrum-edge {
+  height: 3px;
+  background: var(--gradient-spectrum);
+}
+
+/* ── Slider ──────────────────────────────────────────────── */
+.slider-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-block: 0.25rem;
+}
+.slider-track::-webkit-scrollbar { display: none; }
+
+.slider-item {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
 }
 
 /* ── Glass surface (for cards over photography) ──────────── */
