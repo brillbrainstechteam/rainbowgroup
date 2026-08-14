@@ -19,6 +19,13 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
+  // Host-independent noindex. vercel.json sets an X-Robots-Tag header, but that
+  // only applies on Vercel — GitHub Pages cannot set custom headers, so the
+  // meta tag is what actually protects the Pages build. This prototype carries
+  // Rainbow Group's real name, logo and contact details alongside stock photos
+  // of other schools, so it must never surface in search results.
+  // Remove this (and vercel.json) when the site becomes the real one.
+  robots: { index: false, follow: false },
   title: "Rainbow Group of Companies | Thane's Premier Education Group",
   description:
     "Rainbow Group of Companies is the parent organisation behind premier educational institutions shaping the next generation across Thane, Maharashtra, and beyond.",
